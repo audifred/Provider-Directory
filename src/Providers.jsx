@@ -1,14 +1,23 @@
 import React from 'react';
-import SortingHeader from './SortingHeader';
-import ProviderList from './ProviderList';
-import SearchProvider from './SearchProvider';
+import ProviderItem from './ProviderItem';
 
-export default function Providers() {
+export default function Providers(props) {
   return (
-    <div>
-      <SearchProvider />
-      <SortingHeader />
-      <ProviderList />
-    </div>
+    <table style={{ width: '100%' }}>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Practice Name</th>
+          <th>Specialty </th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.providers.map(item => (
+          <ProviderItem key={item.email} item={item} />
+        ))}
+      </tbody>
+    </table>
   );
 }
