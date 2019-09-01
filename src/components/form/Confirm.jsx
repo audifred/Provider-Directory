@@ -4,7 +4,7 @@ export default function Confirm(props) {
   const { values, handleSubmit, toPrevStep } = props;
   return (
     <div>
-      <form className="confirm">
+      <form className=" confirm">
         <label htmlFor="firstName">
           First Name:
           <input type="text" value={values.firstName} readOnly />
@@ -13,7 +13,10 @@ export default function Confirm(props) {
           Last Name:
           <input type="text" value={values.lastName} readOnly />
         </label>
-
+        <label htmlFor="email">
+          Email:
+          <input type="text" value={values.email} readOnly />
+        </label>
         <label htmlFor="practiceName">
           Practice Name:
           <input type="text" value={values.practiceName} readOnly />
@@ -22,11 +25,14 @@ export default function Confirm(props) {
           Specialty:
           <input type="text" value={values.specialty} readOnly />
         </label>
-
-        <button onClick={toPrevStep}>Edit Entry</button>
-        <button type="submit" onClick={handleSubmit}>
-          Add Provider
-        </button>
+        <div className="addProvider">
+          <button className="btn-sm" onClick={toPrevStep}>
+            Edit Entry
+          </button>
+          <button className="btn-sm" type="submit" onClick={handleSubmit}>
+            Add Provider
+          </button>
+        </div>
       </form>
     </div>
   );

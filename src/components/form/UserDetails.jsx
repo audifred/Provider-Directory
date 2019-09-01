@@ -4,7 +4,7 @@ export default function UserDetails(props) {
   const { values, handleChange, toNextStep } = props;
   return (
     <div>
-      <form className="confirm">
+      <form className="form">
         <label htmlFor="firstName">
           First Name:
           <input
@@ -38,7 +38,11 @@ export default function UserDetails(props) {
             type="text"
           />
         </label>
-        <button onClick={toNextStep}>Continue</button>
+        <button className="btn-sm" onClick={toNextStep}>
+          Continue
+        </button>
+
+        <button className="btn-sm">X</button>
       </form>
     </div>
   );

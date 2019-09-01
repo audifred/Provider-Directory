@@ -4,7 +4,7 @@ export default function PracticeDetails(props) {
   const { values, handleChange, toNextStep, toPrevStep } = props;
   return (
     <div>
-      <form className="confirm">
+      <form className="form">
         <label htmlFor="practiceName">
           Practice Name:
           <input
@@ -27,8 +27,12 @@ export default function PracticeDetails(props) {
             type="text"
           />
         </label>
-        <button onClick={toPrevStep}>Back</button>
-        <button onClick={toNextStep}>Continue</button>
+        <button className="btn-sm back" onClick={toPrevStep}>
+          Back
+        </button>
+        <button className="btn-sm" onClick={toNextStep}>
+          Continue
+        </button>
       </form>
     </div>
   );

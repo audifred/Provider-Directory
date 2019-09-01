@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
-import CreateProvider from './form/CreateProvider';
-import Providers from './Providers';
+import React, { Component, Fragment } from 'react';
+import CreateProvider from './components/form/CreateProvider';
+import Header from './components/Header';
+import Providers from './components/Providers';
+import Toggle from './components/Toggle';
 import directory from './data/directory.json';
+import sortBy from 'sort-by';
 
 import './App.css';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    providers: directory,
+    columnToSort: 'lastName'
+  };
 
-    this.addProvider = this.addProvider.bind(this);
-
-    this.state = {
-      providers: directory
-    };
-  }
-
-  addProvider(provider) {
+  addProvider = provider => {
     const newItem = {
       firstName: provider.firstName,
       lastName: provider.lastName,
@@ -28,14 +26,64 @@ export default class App extends Component {
     this.setState({
       providers: [newItem, ...this.state.providers]
     });
-  }
+  };
+
+  handleSort = columnName => {
+    this.setState(prevState => ({
+      columnToSort:
+        columnName === prevState.columnToSort ? `-${columnName}` : columnName
+    }));
+  };
 
   render() {
+    const headers = [
+      {
+        name: 'First Name',
+        prop: 'firstName'
+      },
+      {
+        name: 'Last Name',
+        prop: 'lastName'
+      },
+      {
+        name: 'Email',
+        prop: 'email'
+      },
+      {
+        name: 'Practice Name',
+        prop: 'practiceName'
+      },
+      {
+        name: 'Specialty',
+        prop: 'specialty'
+      }
+    ];
+
+    const { columnToSort, providers } = this.state;
     return (
-      <React.Fragment>
-        <CreateProvider addProvider={this.addProvider} />
-        <Providers providers={this.state.providers} />
-      </React.Fragment>
+      <div className="">
+        <div className="providers">
+          <Toggle>
+            {({ on, toggle }) => (
+              <Fragment>
+                <Header toggle={toggle} />
+                {on && (
+                  <CreateProvider
+                    toggle={toggle}
+                    addProvider={this.addProvider}
+                  />
+                )}
+              </Fragment>
+            )}
+          </Toggle>
+          <Providers
+            handleSort={this.handleSort}
+            headers={headers}
+            sortDirection={columnToSort}
+            providers={providers.sort(sortBy(columnToSort))}
+          />
+        </div>
+      </div>
     );
   }
 }

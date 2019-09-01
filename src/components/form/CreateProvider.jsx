@@ -30,7 +30,7 @@ export class CreateProvider extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.addProvider(this.state.firstName);
+    this.props.addProvider(this.state);
     this.setState({
       step: 1,
       firstName: '',
@@ -67,32 +67,38 @@ export class CreateProvider extends Component {
     const values = { firstName, lastName, email, practiceName, specialty };
 
     switch (step) {
-      case 1:
+      default:
         return (
-          <UserDetails
-            toNextStep={this.toNextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
+          <div className="container">
+            <UserDetails
+              toNextStep={this.toNextStep}
+              handleChange={this.handleChange}
+              values={values}
+            />
+          </div>
         );
 
       case 2:
         return (
-          <PracticeDetails
-            toPrevStep={this.toPrevStep}
-            toNextStep={this.toNextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
+          <div className="container">
+            <PracticeDetails
+              toPrevStep={this.toPrevStep}
+              toNextStep={this.toNextStep}
+              handleChange={this.handleChange}
+              values={values}
+            />
+          </div>
         );
 
       case 3:
         return (
-          <Confirm
-            handleSubmit={this.onSubmit}
-            toPrevStep={this.toPrevStep}
-            values={values}
-          />
+          <div className="container">
+            <Confirm
+              handleSubmit={this.onSubmit}
+              toPrevStep={this.toPrevStep}
+              values={values}
+            />
+          </div>
         );
     }
   }
