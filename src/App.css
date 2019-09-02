@@ -22,7 +22,7 @@ body {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
-  color: white;
+  color: #eee;
   background-color: #0976b8;
 }
 
@@ -33,7 +33,7 @@ body {
   font-weight: bold;
   font-size: 15px;
   cursor: pointer;
-  color: white;
+  color: #eee;
   background-color: #0976b8;
   margin-left: 0.5em;
   padding: 0 0.5em;
@@ -56,9 +56,49 @@ img {
   width: 150px;
 }
 
+.searchBox label {
+  padding: 0.25em;
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 80vw;
+  border: 1px #0976b8 solid;
+  border-radius: 20px;
+  margin: 1em auto;
+}
+
+.searchBox  input {
+  padding: 0 0.25em;
+  font-size: 15px;
+  border: none;
+  width: 40em;
+  border-radius: 20px;
+}
+
+.editModal {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: rgba(221,221,221, 0.8);
+}
+
+.editModal div {
+  display: grid;
+
+  justify-items: center;
+}
+
+.modalButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .form {
   height: 4em;
-  display: grid;
+  display: gr2d;
   grid-template-columns: repeat(8, 1fr);
   justify-items: center;
   align-items: center
@@ -68,7 +108,7 @@ label {
   grid-column: span 2;
 }
 
-input {
+form input {
   margin-left: 0.25em;
   border: 1px solid grey;
   border-radius: 5%;
@@ -93,6 +133,7 @@ input {
   border: none;
   background: transparent;
   font-size: 15px;
+  font-weight: 800;
 }
 table {
   border: 1px solid #ddd;

@@ -5,9 +5,13 @@ import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class Providers extends Component {
   render() {
-    const { providers, sortDirection } = this.props;
+    const { providers, sortDirection, deleteProvider } = this.props;
     const providersList = providers.map(item => (
-      <ProviderItem key={item.email} item={item} />
+      <ProviderItem
+        deleteProvider={deleteProvider}
+        key={item.email}
+        item={item}
+      />
     ));
     const sortOrder = sortDirection.startsWith('-') ? 'sort-desc' : 'sort-asc';
 

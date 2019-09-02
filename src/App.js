@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SearchProvider from './components/SearchProvider';
 import Providers from './components/Providers';
 import Toggle from './components/Toggle';
+import Modal from './components/Modal';
 import directory from './data/directory.json';
 import sortBy from 'sort-by';
 
@@ -13,7 +14,8 @@ export default class App extends Component {
   state = {
     providers: directory,
     columnToSort: 'lastName',
-    searchBox: ''
+    searchBox: '',
+    filter: ''
   };
 
   addProvider = provider => {
@@ -33,7 +35,7 @@ export default class App extends Component {
   handleChange(input) {
     console.log(this.state.searchBox);
     return e => {
-      this.setState({ [input]: e.target.value });
+      this.setState({ [input.trim()]: e.target.value });
     };
   }
 
@@ -41,6 +43,14 @@ export default class App extends Component {
     this.setState(prevState => ({
       columnToSort:
         columnName === prevState.columnToSort ? `-${columnName}` : columnName
+    }));
+  };
+
+  deleteProvider = provider => {
+    this.setState(prevState => ({
+      providers: prevState.providers.filter(
+        providerItem => providerItem.email !== provider.email
+      )
     }));
   };
 
@@ -72,8 +82,9 @@ export default class App extends Component {
     const values = { searchBox };
 
     const filteredProviders = providers.filter(provider => {
-      return provider.firstName.toLowerCase().includes(searchBox.toLowerCase());
+      return provider.lastName.toLowerCase().includes(searchBox.toLowerCase());
     });
+
     return (
       <div className="">
         <div className="providers">
@@ -95,6 +106,7 @@ export default class App extends Component {
             handleChange={this.handleChange.bind(this)}
           />
           <Providers
+            deleteProvider={this.deleteProvider}
             handleSort={this.handleSort}
             headers={headers}
             sortDirection={columnToSort}
