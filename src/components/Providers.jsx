@@ -11,8 +11,6 @@ export default class Providers extends Component {
     ));
     const sortOrder = sortDirection.startsWith('-') ? 'sort-desc' : 'sort-asc';
 
-    console.log(sortOrder);
-
     return (
       <table style={{ width: '100%' }}>
         <thead>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import CreateProvider from './components/form/CreateProvider';
 import Header from './components/Header';
+import SearchProvider from './components/SearchProvider';
 import Providers from './components/Providers';
 import Toggle from './components/Toggle';
 import directory from './data/directory.json';
@@ -11,7 +12,8 @@ import './App.css';
 export default class App extends Component {
   state = {
     providers: directory,
-    columnToSort: 'lastName'
+    columnToSort: 'lastName',
+    searchBox: ''
   };
 
   addProvider = provider => {
@@ -27,6 +29,13 @@ export default class App extends Component {
       providers: [newItem, ...this.state.providers]
     });
   };
+
+  handleChange(input) {
+    console.log(this.state.searchBox);
+    return e => {
+      this.setState({ [input]: e.target.value });
+    };
+  }
 
   handleSort = columnName => {
     this.setState(prevState => ({
@@ -59,14 +68,19 @@ export default class App extends Component {
       }
     ];
 
-    const { columnToSort, providers } = this.state;
+    const { columnToSort, providers, searchBox } = this.state;
+    const values = { searchBox };
+
+    const filteredProviders = providers.filter(provider => {
+      return provider.firstName.toLowerCase().includes(searchBox.toLowerCase());
+    });
     return (
       <div className="">
         <div className="providers">
           <Toggle>
             {({ on, toggle }) => (
               <Fragment>
-                <Header toggle={toggle} />
+                <Header on={on} toggle={toggle} />
                 {on && (
                   <CreateProvider
                     toggle={toggle}
@@ -76,11 +90,15 @@ export default class App extends Component {
               </Fragment>
             )}
           </Toggle>
+          <SearchProvider
+            values={values}
+            handleChange={this.handleChange.bind(this)}
+          />
           <Providers
             handleSort={this.handleSort}
             headers={headers}
             sortDirection={columnToSort}
-            providers={providers.sort(sortBy(columnToSort))}
+            providers={filteredProviders.sort(sortBy(columnToSort))}
           />
         </div>
       </div>

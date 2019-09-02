@@ -41,8 +41,6 @@ export default function UserDetails(props) {
         <button className="btn-sm" onClick={toNextStep}>
           Continue
         </button>
-
-        <button className="btn-sm">X</button>
       </form>
     </div>
   );

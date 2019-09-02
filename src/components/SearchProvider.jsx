@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
-import { Typeahead } from 'react-typehead';
+import React from 'react';
 
-export default class SearchProvider extends Component {
-  render() {
-    return (
-      <div>
-        <input type="text" />
-      </div>
-    );
-  }
+export default function SearchProvider(props) {
+  const { values, handleChange } = props;
+  return (
+    <div>
+      <input
+        name="searchBox"
+        placeholder="Search For a Provider"
+        defaultValue={values.searchBox}
+        onChange={handleChange('searchBox')}
+        type="text"
+      />
+    </div>
+  );
 }
