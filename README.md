@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Summary
+A directory for medical providers.
+
+### Technologies Utilized
+1. React
+2. Javascript
+3. HTML5
+4. CSS3
+
+### Link: 
+https://mystifying-gates-910fc4.netlify.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
